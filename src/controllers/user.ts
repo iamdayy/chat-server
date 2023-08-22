@@ -13,7 +13,7 @@ const getMe = async (req: Request, res: Response<IResponseGetMe>) => {
     }
     res.status(200).json({
         status: true,
-        ...req.user
+        account: req.user
     })
 };
 
@@ -53,7 +53,7 @@ const getProfile = async (req: Request<{}, {}, {}, IMethodGetProfile>, res: Resp
 const getProfiles = async (req: Request<{}, {}, {}, IMethodGetProfiles>, res: Response<IResponseGetProfiles>) => {
     try {
         const { searchs } = req.query
-        const user = await User.find({username : { $in: searchs } }).select("username, email, phone, bio, name");
+        const user = await User.find({ username : { $in: searchs } }).select("username, email, phone, bio, name");
         if (!user) {
             return res.status(404).json({
                 status: false,

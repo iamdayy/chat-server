@@ -12,8 +12,8 @@ const gets = async (
 ) => {
   try {
     let query = {};
-    if (req.user?.email) {
-      const nameExp = new RegExp("^" + req.user?.email + "$", "i");
+    if (req.user?.username) {
+      const nameExp = new RegExp("^" + req.user?.username + "$", "i");
       query = { $or: [{ from: nameExp }, { to: nameExp }] };
     }
     const rawMessages = await Message.find(query);
@@ -26,7 +26,7 @@ const gets = async (
     }
     const messages = rawMessages.map((message) => {
         let formself = false;
-        if (message.from == req.user?.email) {
+        if (message.from == req.user?.username) {
            formself = true;
         }
         return {
@@ -56,7 +56,7 @@ const create = async (
     const message = new Message(req.body);
     
     const isFreind = req.user?.freinds.includes(req.body.to);
-    const user = await User.findOne({ email: req.body.to });
+    const user = await User.findOne({ username: req.body.to });
     if (!user) {
       return res.status(404).json({
         status: false,

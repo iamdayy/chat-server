@@ -30,7 +30,9 @@ export interface IResponseGetProfiles extends IResponse {
     accounts?: User[];
 };
 
-export interface IResponseGetMe extends IResponse, Partial<User> {};
+export interface IResponseGetMe extends IResponse {
+    account?: User;
+};
 
 export interface IResponseCreateMessage extends IResponse {};
 

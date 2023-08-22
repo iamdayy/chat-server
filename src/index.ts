@@ -6,8 +6,7 @@ import connect from "./plugins/databases";
 import router from "./routes";
 import initPassport from "./plugins/passport";
 import configuration from "./services/config";
-import { sendEmail } from "./services/mailer";
-import HTML_TEMPLATE from "./assets/html-template";
+import cors from "cors"
 
 
 
@@ -17,6 +16,9 @@ const server = createServer(app);
 
 
 app.use(Express.json());
+app.use(cors({
+  origin: '*' 
+}));
 // Set up Passport
 initPassport(app);
 
