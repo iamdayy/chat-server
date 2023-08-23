@@ -1,7 +1,7 @@
 import Express, { Request, Response } from "express";
 import createError from "http-errors";
 import { createServer } from "http";
-import Socket from "./plugins/socket";
+import Socket, { io } from "./plugins/socket";
 import connect from "./plugins/databases";
 import router from "./routes";
 import initPassport from "./plugins/passport";
@@ -24,7 +24,6 @@ initPassport(app);
 
 // TODO: Routing aplikasi akan kita tulis di sini
 app.use("/api" ,router);
-
 
 // handle 404 error
 app.use((req: Request, res: Response, next: Function) => {

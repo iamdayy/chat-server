@@ -8,6 +8,10 @@ import { IMethodSendEmail } from "../types/IMethods";
 import HTML_TEMPLATE from "../assets/html-template";
 
 const UserSchema: Schema<userschema> = new Schema({
+  avatar: {
+    type: String,
+    required: false,
+  },
   username: {
     type: String,
     required: true,

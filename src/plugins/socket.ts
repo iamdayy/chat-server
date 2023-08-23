@@ -4,13 +4,18 @@ import User from "../models/User";
 let io: Server;
 
 export default (app: httpServer) => {
-    io = new Server(app);
+    io = new Server(app, {
+        cors: {
+            origin: '*'
+        }
+    });
     io.use(async (socket, next) => {
-        const userID = socket.handshake.headers.username;
+        const userID = socket.handshake.auth.username;
+        
         if (!userID) {
             return next(new Error("please apply userID"));
         }
-        const username = await User.findOne({ email: userID });
+        const username = await User.findOne({ username: userID });
         if (!username) {
           return next(new Error("invalid userID"));
         }

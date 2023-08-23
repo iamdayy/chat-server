@@ -53,7 +53,7 @@ const getProfile = async (req: Request<{}, {}, {}, IMethodGetProfile>, res: Resp
 const getProfiles = async (req: Request<{}, {}, {}, IMethodGetProfiles>, res: Response<IResponseGetProfiles>) => {
     try {
         const { searchs } = req.query
-        const user = await User.find({ username : { $in: searchs } }).select("username, email, phone, bio, name");
+        const user = await User.find({ username : { $in: searchs } });
         if (!user) {
             return res.status(404).json({
                 status: false,

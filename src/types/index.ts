@@ -14,6 +14,7 @@ export interface User {
     first: string;
     last?: string;
   };
+  avatar: string;
   username: string;
   active: boolean;
   bio: string;
