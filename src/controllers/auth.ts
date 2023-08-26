@@ -1,6 +1,6 @@
 import model from "../models";
 import  jwt, { JwtPayload } from "jsonwebtoken";
-import { User } from "../types";
+import { Setting, User } from "../types";
 import { IMethodChangePassword, IMethodGetToken, IMethodRegister, IMethodResetPassword } from "../types/IMethods";
 import { Request, Response } from "express";
 import { ExtractJwt } from "passport-jwt";
@@ -8,8 +8,13 @@ import { IResponseChangePassword, IResponseLogin, IResponseRefreshJWT, IResponse
 import configuration from "../services/config";
 const { User } = model;
 
-const register = async (req: Request<{}, IMethodRegister>, res: Response<IResponseRegister>) => {
-    const user = req.body;
+const register = async (req: Request<{}, IResponseRegister, IMethodRegister>, res: Response<IResponseRegister>) => {
+    const user: IMethodRegister = req.body;
+    user.setting = {
+        notification: true,
+        language: 'id',
+        wallpaper: ''
+    } as Setting;
     User.register(user, user.password, (err, user) => {
         if (err) {
            return res.status(400).json(err);

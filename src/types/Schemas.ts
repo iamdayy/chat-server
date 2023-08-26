@@ -1,4 +1,4 @@
-import { User, Message } from ".";
+import { User, Message, Setting } from ".";
 import { Document, PassportLocalDocument } from "mongoose";
 
 export interface userschema extends User, PassportLocalDocument {
@@ -6,6 +6,10 @@ export interface userschema extends User, PassportLocalDocument {
     tokenExpires: Date;
     getToken: () => Promise<void>
     checkToken: (token: string) => Promise<{ status: boolean; message: string }>
+}
+
+export interface settingschema extends Setting, Document {
+
 }
 
 export interface messageschema extends Message, Document {

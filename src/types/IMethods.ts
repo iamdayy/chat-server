@@ -1,6 +1,7 @@
 import { Message, User } from "."
+import { userschema } from "./Schemas";
 
-export interface IMethodRegister extends User {
+export interface IMethodRegister extends userschema {
     password: string;
 };
 

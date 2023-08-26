@@ -1,11 +1,26 @@
 import { Schema, model, PassportLocalDocument, Model } from "mongoose";
 import PasspoLocalMongoose from "passport-local-mongoose";
-import { userschema } from "../types/Schemas";
+import { settingschema, userschema } from "../types/Schemas";
 import { usermodel } from "../types/Models";
 import { randomInt } from "crypto";
 import { sendEmail } from "../services/mailer";
 import { IMethodSendEmail } from "../types/IMethods";
 import HTML_TEMPLATE from "../assets/html-template";
+
+const SettingSchema: Schema<settingschema> = new Schema({
+  notification: {
+    type: Boolean,
+    default: true,
+  },
+  wallpaper: {
+    type: String,
+  },
+  language: {
+    type: String,
+    enum: ['id', 'en'],
+    default: 'id'
+  }
+})
 
 const UserSchema: Schema<userschema> = new Schema({
   avatar: {
@@ -42,8 +57,8 @@ const UserSchema: Schema<userschema> = new Schema({
   freinds: {
     type: [String],
   },
-  requests: {
-    type: [String],
+  setting: {
+    type: SettingSchema,
   },
   token: {
     type: Number,

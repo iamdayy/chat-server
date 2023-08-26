@@ -72,16 +72,20 @@ const getProfiles = async (req: Request<{}, {}, {}, IMethodGetProfiles>, res: Re
     }
 };
 
-const updateProfile = async (req:Request<{}, IMethodUpdateProfile>, res: Response<IResponseUpdateProfile>) => {
+const updateProfile = async (req:Request<{}, IResponseUpdateProfile, IMethodUpdateProfile>, res: Response<IResponseUpdateProfile>) => {
     try {
         const id = req.user?._id
-        const user = await User.findById(id);
-        user?.updateOne(req.body);
-        user?.save();
-        res.status(200).json({
-            status: true,
-            message: "Your account is updated"
+        const user = await User.findOne({ _id: id }).updateOne({ $set: req.body });
+        if (!user.modifiedCount) {
+        return res.status(400).json({
+            status: false,
+            message: "Your account is't updated"
         })
+    }
+    return res.status(200).json({
+        status: true,
+        message: "Your account is updated"
+    })
     } catch (error: any) {
         res.status(500).json({
             status: false,
