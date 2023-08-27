@@ -3,6 +3,7 @@ import models from "../models";
 import { IMethodCreateMessage, IMethodGetMessages } from "../types/IMethods";
 import { io } from "../plugins/socket";
 import { IResponseCreateMessage, IResponseGetMessage } from "../types/IResponse";
+import { messaging } from "firebase-admin";
 
 const { Message, User } = models;
 
@@ -65,6 +66,19 @@ const create = async (
     }
     if (!isFreind) {
       req.user?.freinds.push(req.body.to);
+    }
+    if (user.fcm) {
+      messaging().send({
+        notification: {
+          title: message.from,
+          body: message.body.text,
+        },
+        token: user.fcm
+      }).then( data => { 
+        console.log(data);
+       }).catch( err => {
+        console.log(err);
+       })
     }
     
     message.save();

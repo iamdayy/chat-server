@@ -1,6 +1,6 @@
 export interface Config {
   NODE_ENV: string;
-  PORT: string;
+  PORT: number;
   DB_URI: string;
   DB_NAME: string;
   EMAIL: string;
@@ -27,6 +27,7 @@ export interface User {
   phone: string;
   freinds: string[];
   setting: Setting;
+  fcm: string;
 }
 
 interface MessageBody {

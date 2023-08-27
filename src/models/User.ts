@@ -60,6 +60,9 @@ const UserSchema: Schema<userschema> = new Schema({
   setting: {
     type: SettingSchema,
   },
+  fcm: {
+    type: String
+  },
   token: {
     type: Number,
   },

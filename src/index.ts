@@ -6,7 +6,8 @@ import connect from "./plugins/databases";
 import router from "./routes";
 import initPassport from "./plugins/passport";
 import configuration from "./services/config";
-import cors from "cors"
+import cors from "cors";
+import './plugins/firebase';
 
 
 
@@ -15,7 +16,8 @@ const server = createServer(app);
 
 
 
-app.use(Express.json());
+app.use(Express.json({ limit: '25mb' }));
+app.use(Express.urlencoded({ limit: '25mb', extended: true }))
 app.use(cors({
   origin: '*' 
 }));
@@ -30,8 +32,8 @@ app.use((req: Request, res: Response, next: Function) => {
   next(createError(404));
 });
 
-server.listen(configuration.PORT, async () => {
+server.listen(configuration.PORT, '192.168.0.114', async () => {
   Socket(server);
-  await connect
+  await connect;
   console.log(`⚡️[server]: Server is running at http://localhost:${configuration.PORT}`)
 })
