@@ -1,7 +1,6 @@
 import { config } from "dotenv";
 import path from "path";
 import { Config } from "../types";
-
 config({path: path.resolve(__dirname, "../../dev.env") });
 
 const configuration: Config = {
