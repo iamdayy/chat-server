@@ -15,6 +15,9 @@ const SettingSchema: Schema<settingschema> = new Schema({
   wallpaper: {
     type: String,
   },
+  wpOpacity: {
+    type: Number
+  },
   language: {
     type: String,
     enum: ['id', 'en'],

@@ -13,7 +13,8 @@ const register = async (req: Request<{}, IResponseRegister, IMethodRegister>, re
     user.setting = {
         notification: true,
         language: 'id',
-        wallpaper: ''
+        wallpaper: '',
+        wpOpacity: 1
     } as Setting;
     User.register(user, user.password, (err, user) => {
         if (err) {
