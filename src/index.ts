@@ -32,7 +32,7 @@ app.use((req: Request, res: Response, next: Function) => {
   next(createError(404));
 });
 
-server.listen(configuration.PORT, '192.168.0.115', async () => {
+server.listen(configuration.PORT, async () => {
   Socket(server);
   await connect;
   console.log(`⚡️[server]: Server is running at http://localhost:${configuration.PORT}`)

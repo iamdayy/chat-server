@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import path from "path";
 import { Config } from "../types";
-config({path: path.resolve(__dirname, "../../dev.env") });
+config({path: path.resolve(__dirname, "../../prod.env") });
 
 const configuration: Config = {
     PORT: process.env.PORT,
